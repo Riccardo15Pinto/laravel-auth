@@ -18,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestHomeController::class, 'index'])->name('guests.home');
 
-Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+
+Route::prefix('/admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
