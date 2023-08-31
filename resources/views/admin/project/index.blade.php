@@ -58,6 +58,10 @@
 
             </tbody>
         </table>
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i>
+            Aggiungi Nuovo Progetto
+        </a>
     </div>
 @endsection
 
