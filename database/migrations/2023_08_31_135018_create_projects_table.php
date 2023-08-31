@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name_project')->unique();
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->text('url_project');
             $table->text('description_project')->nullable();
             $table->string('type_project');
