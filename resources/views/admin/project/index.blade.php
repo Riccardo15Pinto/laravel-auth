@@ -37,7 +37,10 @@
                                     <i class="fa-solid fa-pen-nib"></i>
                                 </a>
 
-                                <form action="">
+                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                                    class="delete-form" data-name="{{ $project->name_project }}">
+                                    @method('DELETE')
+                                    @csrf
                                     <button class="btn btn-danger">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
@@ -56,4 +59,8 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete-form.js')
 @endsection
