@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 
 class ProjectController extends Controller
@@ -23,7 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.project.create');
+        $project = new Project();
+        return view('admin.project.create', compact('project'));
     }
 
     /**
@@ -31,7 +34,30 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data_new_project = $request->all();
+
+        $request->validate(
+            [
+                'name_project' => 'required|string|max:50',
+                'url_project' => 'required|string|url',
+                'description_project' => 'required|string',
+                'type_project' => 'required|string',
+            ],
+            [
+                'name_project.required' => 'Il titolo è obbligatorio',
+                'url_project.required' => 'L\'url è obbligatorio',
+                'description_project.required' => 'La descrizione è obbligatoria',
+                'type_project.required' => 'La tipologia di progetto è obbligatoria',
+                'url_project.url' => 'L\'url deve contenere http , https',
+            ]
+        );
+
+        $project = new Project();
+        $project->fill($data_new_project);
+        $project->slug = Str::slug($data_new_project['name_project'], '-');
+        $project->save();
+
+        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', "$project->name_project creato con successo");
     }
 
     /**
@@ -47,7 +73,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.project.edit', compact('project'));
     }
 
     /**
@@ -55,7 +81,28 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data_new_project = $request->all();
+
+        $request->validate(
+            [
+                'name_project' => 'required|string|max:50',
+                'url_project' => 'required|string|url',
+                'description_project' => 'required|string',
+                'type_project' => 'required|string',
+            ],
+            [
+                'name_project.required' => 'Il titolo è obbligatorio',
+                'url_project.required' => 'L\'url è obbligatorio',
+                'description_project.required' => 'La descrizione è obbligatoria',
+                'type_project.required' => 'La tipologia di progetto è obbligatoria',
+                'url_project.url' => 'L\'url deve contenere http , https',
+            ]
+        );
+
+
+        $project->update();
+
+        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', "$project->name_project modificato con successo");
     }
 
     /**
