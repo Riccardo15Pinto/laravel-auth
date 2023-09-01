@@ -113,4 +113,28 @@ class ProjectController extends Controller
         $project->delete();
         return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-message', "$project->name_project eliminato con successo");
     }
+
+    // public function trash()
+    // {
+    //     $project = Project::onlyTrashed()->get();
+    //     return view('students.trash', compact('students'));
+    // }
+
+    // public function restore(string $id)
+    // {
+    //     $student = Project::onlyTrashed()->findOrFail($id);
+    //     $student->restore();
+    //     return to_route('students.trash')
+    //         ->with('alert-type', 'success')
+    //         ->with('alert-message', "Lo studente $student->first_name $student->last_name è stato ripristinato con successo");
+    // }
+
+
+    // public function restoreAll()
+    // {
+    //     Project::onlyTrashed()->restore();
+    //     return to_route('students.trash')
+    //         ->with('alert-type', 'success')
+    //         ->with('alert-message', "Hai ripristinato con successo tutti gli studenti");
+    // }
 }
