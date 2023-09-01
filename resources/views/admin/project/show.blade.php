@@ -15,12 +15,17 @@
                 <div class="d-flex align-items-center justify-content-between">
 
                     <a href="{{ $project->url_project }}" class="card-link">Link GitHub</a>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#{{ $project->id }}">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
+                    <div>
+                        <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning me-2">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#{{ $project->id }}">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
 
-                    @include('includes.modal-delete')
+                        @include('includes.modal-delete')
+                    </div>
                 </div>
             </div>
         </div>
