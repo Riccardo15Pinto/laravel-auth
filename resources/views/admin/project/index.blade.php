@@ -61,7 +61,7 @@
                 <i class="fa-solid fa-plus"></i>
                 Aggiungi Nuovo Progetto
             </a>
-            <a href="{{ route('admin.trash') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.projects.trash') }}" class="btn btn-secondary">
                 <i class="fa-solid fa-trash"></i>
                 Trash
             </a>

@@ -31,7 +31,3 @@
         </div>
     </div>
 @endsection
-
-@section('scripts')
-    @vite('resources/js/delete-form.js')
-@endsection

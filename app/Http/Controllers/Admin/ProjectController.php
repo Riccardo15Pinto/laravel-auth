@@ -100,7 +100,7 @@ class ProjectController extends Controller
         );
 
 
-        $project->update();
+        $project->update($data_new_project);
 
         return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', "$project->name_project modificato con successo");
     }
@@ -120,21 +120,22 @@ class ProjectController extends Controller
         return view('admin.project.trash', compact('projects'));
     }
 
-    // public function restore(string $id)
-    // {
-    //     $student = Project::onlyTrashed()->findOrFail($id);
-    //     $student->restore();
-    //     return to_route('students.trash')
-    //         ->with('alert-type', 'success')
-    //         ->with('alert-message', "Lo studente $student->first_name $student->last_name è stato ripristinato con successo");
-    // }
+    public function restore(string $id)
+    {
+        $project = Project::onlyTrashed()->findOrFail($id)->get();
+
+        $project->restore();
+        return to_route('admin.projects.trash')
+            ->with('alert-type', 'success')
+            ->with('alert-message', "Il progetto è stato ripristinato con successo");
+    }
 
 
-    // public function restoreAll()
-    // {
-    //     Project::onlyTrashed()->restore();
-    //     return to_route('students.trash')
-    //         ->with('alert-type', 'success')
-    //         ->with('alert-message', "Hai ripristinato con successo tutti gli studenti");
-    // }
+    public function restoreAll()
+    {
+        Project::onlyTrashed()->restore();
+        return to_route('admin.projects.trash')
+            ->with('alert-type', 'success')
+            ->with('alert-message', "Hai ripristinato con successo tutti gli studenti");
+    }
 }

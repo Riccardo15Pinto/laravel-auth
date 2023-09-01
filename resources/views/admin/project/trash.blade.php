@@ -5,9 +5,17 @@
 
 @section('content')
     <div class="container">
-        <h2 class="fs-4 text-secondary my-4">
-            Trash
-        </h2>
+        <div class="d-flex align-items-center justify-content-between">
+
+            <h2 class="fs-4 text-secondary my-4">
+                Trash
+            </h2>
+            <form action="{{ route('admin.projects.trash.restoreAll') }}" method="Post" class="restore-all-form ms-2">
+                @method('patch')
+                @csrf
+                <button type="submit" class="btn btn-success">Ripristina tutto</button>
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -30,21 +38,13 @@
                         <td>{{ $project->description_project }}</td>
                         <td>{{ $project->type_project }}</td>
                         <td>
-                            <div class="d-flex">
-
-                                <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary me-2">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning me-2">
-                                    <i class="fa-solid fa-pen-nib"></i>
-                                </a>
-
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#{{ $project->id }}">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-
-                                @include('includes.modal-delete')
+                            <div class="container d-flex justify-content-between">
+                                <form action="{{ route('admin.projects.trash.restore', $project->id) }}" method="Post"
+                                    class="restore-all-form ms-2">
+                                    @method('patch')
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">Ripristina</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
