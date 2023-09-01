@@ -22,6 +22,7 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('guests.home');
 // # Admin route
 Route::prefix('/admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+    Route::get('projects/trash', [ProjectController::class, 'trash'])->name('trash');
     Route::resource('projects', ProjectController::class);
 });
 

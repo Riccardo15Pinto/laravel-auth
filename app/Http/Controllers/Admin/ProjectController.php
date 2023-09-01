@@ -114,11 +114,11 @@ class ProjectController extends Controller
         return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-message', "$project->name_project eliminato con successo");
     }
 
-    // public function trash()
-    // {
-    //     $project = Project::onlyTrashed()->get();
-    //     return view('students.trash', compact('students'));
-    // }
+    public function trash()
+    {
+        $projects = Project::onlyTrashed()->get();
+        return view('admin.project.trash', compact('projects'));
+    }
 
     // public function restore(string $id)
     // {
