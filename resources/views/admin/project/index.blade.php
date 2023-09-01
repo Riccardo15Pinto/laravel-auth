@@ -56,9 +56,16 @@
 
             </tbody>
         </table>
-        <a href="{{ route('admin.projects.create') }}" class="btn btn-success">
-            <i class="fa-solid fa-plus"></i>
-            Aggiungi Nuovo Progetto
-        </a>
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>
+                Aggiungi Nuovo Progetto
+            </a>
+            <a href="{{ route('admin.trash') }}" class="btn btn-secondary">
+                <i class="fa-solid fa-trash"></i>
+                Trash
+            </a>
+        </div>
+
     </div>
 @endsection
