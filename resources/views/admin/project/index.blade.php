@@ -37,14 +37,12 @@
                                     <i class="fa-solid fa-pen-nib"></i>
                                 </a>
 
-                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
-                                    class="delete-form" data-name="{{ $project->name_project }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#{{ $project->id }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+
+                                @include('includes.modal-delete')
                             </div>
                         </td>
                     </tr>
@@ -63,8 +61,4 @@
             Aggiungi Nuovo Progetto
         </a>
     </div>
-@endsection
-
-@section('scripts')
-    @vite('resources/js/delete-form.js')
 @endsection

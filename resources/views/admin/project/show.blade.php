@@ -15,14 +15,12 @@
                 <div class="d-flex align-items-center justify-content-between">
 
                     <a href="{{ $project->url_project }}" class="card-link">Link GitHub</a>
-                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="delete-form"
-                        data-name="{{ $project->name_project }}">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </form>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#{{ $project->id }}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+
+                    @include('includes.modal-delete')
                 </div>
             </div>
         </div>
