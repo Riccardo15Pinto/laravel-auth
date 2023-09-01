@@ -53,7 +53,7 @@
     </div>
 </div>
 <button type="submit" class="btn btn-success my-3">
-    <i class="fa-solid fa-circle-plus"></i>
-    Crea
+    <i class="fa-regular fa-floppy-disk"></i>
+    Save
 </button>
 </form>
