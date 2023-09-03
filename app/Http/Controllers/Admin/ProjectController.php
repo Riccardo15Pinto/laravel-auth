@@ -141,7 +141,7 @@ class ProjectController extends Controller
         Project::onlyTrashed()->restore();
         return to_route('admin.projects.trash')
             ->with('alert-type', 'success')
-            ->with('alert-message', "Hai ripristinato con successo tutti gli studenti");
+            ->with('alert-message', "Hai ripristinato con successo tutti i progetti");
     }
 
     public function drop(string $id)
