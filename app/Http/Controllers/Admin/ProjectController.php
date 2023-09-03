@@ -111,7 +111,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-message', "$project->name_project eliminato con successo");
+        return to_route('admin.projects.index')
+            ->with('alert-type', 'success')
+            ->with('alert-message', "$project->name_project eliminato con successo")
+            ->with('toast-route', route('admin.projects.trash.restore', $project->id))
+            ->with('toast-messagge', 'Vuoi ripristinare il progetto?')
+            ->with('toast-method', 'patch');
     }
 
     public function trash()
@@ -122,12 +127,12 @@ class ProjectController extends Controller
 
     public function restore(string $id)
     {
-        $project = Project::onlyTrashed()->findOrFail($id)->get();
+        $project = Project::onlyTrashed()->findOrFail($id);
 
         $project->restore();
         return to_route('admin.projects.trash')
             ->with('alert-type', 'success')
-            ->with('alert-message', "Il progetto è stato ripristinato con successo");
+            ->with('alert-message', "$project->name_project è stato ripristinato con successo");
     }
 
 
@@ -137,5 +142,14 @@ class ProjectController extends Controller
         return to_route('admin.projects.trash')
             ->with('alert-type', 'success')
             ->with('alert-message', "Hai ripristinato con successo tutti gli studenti");
+    }
+
+    public function drop(string $id)
+    {
+
+        $project = Project::onlyTrashed()->findOrFail($id);
+        $project->forceDelete();
+        return to_route('admin.projects.index')->with('alert-type', 'success')
+            ->with('alert-message', "$project->name_project eliminato definitivamente");
     }
 }
