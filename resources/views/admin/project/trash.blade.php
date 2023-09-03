@@ -47,6 +47,16 @@
                                 </form>
                             </div>
                         </td>
+                        <td>
+                            <div class="container d-flex justify-content-between">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#{{ $project->id }}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+
+                                @include('includes.modal-delete')
+                            </div>
+                        </td>
                     </tr>
                 @empty
                     <tr>

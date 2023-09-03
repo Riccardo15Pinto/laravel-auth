@@ -15,10 +15,18 @@
                         <a class="nav-link @if (request()->routeIs('admin.home')) active @endif"
                             href="{{ url('/') }}">{{ __('Home') }}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link @if (request()->routeIs('admin.projects*')) active @endif"
-                            href="{{ route('admin.projects.index') }}">Projects</a>
-                    </li>
+
+                    @guest
+                        <li>
+                            <a href="#" class="nav-link">Scopri di più</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link @if (request()->routeIs('admin.projects*')) active @endif"
+                                href="{{ route('admin.projects.index') }}">Projects</a>
+                        </li>
+
+                    @endguest
                 </ul>
             </div>
         </div>

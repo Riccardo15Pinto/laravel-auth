@@ -26,6 +26,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth'])->group(function ()
     Route::patch('/projects/trash/restoreAll', [ProjectController::class, 'restoreAll'])->name('projects.trash.restoreAll');
 
     Route::patch('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.trash.restore');
+    Route::delete('/projects/trash/{project}/drop', [ProjectController::class, 'drop'])->name('projects.trash.drop');
 
     Route::resource('projects', ProjectController::class);
 });
