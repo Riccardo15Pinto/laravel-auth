@@ -20,8 +20,8 @@
         </div>
     </div>
 @endif
-@section('scripts')
+{{-- @section('scripts')
     @if (session('toast-messagge'))
         @vite('resources/js/toast.js')
     @endif
-@endsection
+@endsection --}}
