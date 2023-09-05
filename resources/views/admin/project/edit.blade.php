@@ -10,3 +10,7 @@
         @include('includes.project.form')
     </div>
 @endsection
+
+@section('scripts')
+    @vite('resources/js/image-preview.js')
+@endsection

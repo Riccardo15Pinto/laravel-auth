@@ -6,8 +6,8 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-
-
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -36,12 +36,14 @@ class ProjectController extends Controller
     {
         $data_new_project = $request->all();
 
+
         $request->validate(
             [
                 'name_project' => 'required|string|max:50',
                 'url_project' => 'required|string|url',
                 'description_project' => 'required|string',
                 'type_project' => 'required|string',
+                'image' => 'required|image'
             ],
             [
                 'name_project.required' => 'Il titolo è obbligatorio',
@@ -49,10 +51,24 @@ class ProjectController extends Controller
                 'description_project.required' => 'La descrizione è obbligatoria',
                 'type_project.required' => 'La tipologia di progetto è obbligatoria',
                 'url_project.url' => 'L\'url deve contenere http , https',
+                'image.required' => 'L\' immagine è obbligatoria'
             ]
         );
 
         $project = new Project();
+
+        // if (Arr::exists($request, 'image')) {
+        //     if ($project->image) Storage::delete($project->image);
+        //     $img_url = Storage::putFile('project_images', $request->image);
+        //     $project->image = $img_url;
+        // }
+
+        if (Arr::exists($data_new_project, 'image')) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::putFile('project_images', $data_new_project['image']);
+            $data_new_project['image'] = $img_url;
+        }
+
         $project->fill($data_new_project);
         $project->slug = Str::slug($data_new_project['name_project'], '-');
         $project->save();
@@ -89,6 +105,8 @@ class ProjectController extends Controller
                 'url_project' => 'required|string|url',
                 'description_project' => 'required|string',
                 'type_project' => 'required|string',
+                'image' => 'required|image'
+
             ],
             [
                 'name_project.required' => 'Il titolo è obbligatorio',
@@ -96,9 +114,22 @@ class ProjectController extends Controller
                 'description_project.required' => 'La descrizione è obbligatoria',
                 'type_project.required' => 'La tipologia di progetto è obbligatoria',
                 'url_project.url' => 'L\'url deve contenere http , https',
+                'image.required' => 'L\' immagine è obbligatoria'
+
             ]
         );
 
+        if (Arr::exists($data_new_project, 'image')) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::putFile('project_images', $data_new_project['image']);
+            $data_new_project['image'] = $img_url;
+        }
+
+        // if (Arr::exists($request, 'image')) {
+        //     if ($project->image) Storage::delete($project->image);
+        //     $img_url = Storage::putFile('project_images', $request['image']);
+        //     $project->image = $img_url;
+        // }
 
         $project->update($data_new_project);
 
@@ -110,6 +141,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) Storage::delete($project->image);
         $project->delete();
         return to_route('admin.projects.index')
             ->with('alert-type', 'success')

@@ -11,3 +11,7 @@
 
     </div>
 @endsection
+
+@section('scripts')
+    @vite('resources/js/image-preview.js')
+@endsection

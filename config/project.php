@@ -6,6 +6,7 @@ return [
         'description_project' => 'Progetto sulla DC usando Laravel',
         'type_project' => 'PHP/Laravel',
         'slug' => '',
+        'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/985px-Laravel.svg.png',
     ],
     [
         'name_project' => 'Laravel-Migration-Seeder',
@@ -13,6 +14,8 @@ return [
         'description_project' => 'Progetto basato sull\' apprendimento delle migration e sui seeder usando Laravel',
         'type_project' => 'PHP/Laravel',
         'slug' => '',
+        'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/985px-Laravel.svg.png',
+
     ],
     [
         'name_project' => 'Laravel-Primi-Passi',
@@ -20,5 +23,7 @@ return [
         'description_project' => 'Progetto basato sull\' apprendimento di Laravel',
         'type_project' => 'PHP/Laravel',
         'slug' => '',
+        'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/985px-Laravel.svg.png',
+
     ],
 ];

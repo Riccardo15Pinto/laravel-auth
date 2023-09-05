@@ -1,8 +1,8 @@
 @if ($project->exists)
-    <form action="{{ route('admin.projects.update', $project) }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
     @else
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
 @endif
 @csrf
 <div class="row">
@@ -50,6 +50,22 @@
                 {{ $message }}
             </div>
         @enderror
+    </div>
+    <div class="col-9 py-2">
+        <label for="image" class="form-label">Logo</label>
+        <input type="file"
+            class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror"
+            id="image" placeholder="Inserisci un logo per il tuo progetto" name="image"
+            value="{{ old('image', $project->image ?? '') }}">
+        @error('image')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <div class="col-3 py-2">
+        <img src="https://marcolanci.it/utils/placeholder.jpg" alt="preview-logo" id="image-preview"
+            style="width: 150px;">
     </div>
 </div>
 <button type="submit" class="btn btn-success my-3">

@@ -11,5 +11,10 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name_project', 'url_project', 'description_project', 'type_project', 'slug'];
+    protected $fillable = ['name_project', 'url_project', 'description_project', 'type_project', 'slug', 'image'];
+
+    public function getImagePath()
+    {
+        return asset('storage/' . $this->image);
+    }
 }

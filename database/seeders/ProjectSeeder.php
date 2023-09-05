@@ -22,6 +22,7 @@ class ProjectSeeder extends Seeder
             $project->slug = Str::slug($item['name_project'], '-');
             $project->url_project = $item['url_project'];
             $project->description_project = $item['description_project'];
+            $project->image = $item['image'];
             $project->type_project = $item['type_project'];
 
             $project->save();

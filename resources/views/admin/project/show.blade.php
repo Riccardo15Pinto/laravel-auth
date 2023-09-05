@@ -27,6 +27,11 @@
                         @include('includes.modal-delete')
                     </div>
                 </div>
+                @if ($project->image)
+                    <figure>
+                        <img src="{{ $project->getImagePath() }}" alt="{{ $project->name_project }}">
+                    </figure>
+                @endif
             </div>
         </div>
     </div>
